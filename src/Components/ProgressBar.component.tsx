@@ -1,8 +1,29 @@
 
 
+import { useEffect, useState } from 'react';
 import style from '../Style/Components/Progress.module.scss';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const ProgressBar = () => {
+
+    const [progres, setProgress] = useState<number>(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (progres != 100) setProgress(progres + 1);
+
+            if (progres == 100) navigate('/payment');
+
+          }, 50);
+        return () => {
+            clearInterval(timer);
+          };
+    });
+
     return (
         <>
             <div className={style['Progress']}>
@@ -16,7 +37,7 @@ const ProgressBar = () => {
 
                             <div className={style['Progress_wrap_pr_resvis_progress']}>
 
-                                <div className={style['Progress_wrap_pr_resvis_progress_active']}></div>
+                                <div className={style['Progress_wrap_pr_resvis_progress_active']} style={{width: `${progres}%`}}></div>
 
                             </div>
 
@@ -24,7 +45,7 @@ const ProgressBar = () => {
                         </div>
 
                         <div className={style['Progress_wrap_pr_res']}>
-                            68%
+                            {progres} %
                         </div>
 
                     </div>

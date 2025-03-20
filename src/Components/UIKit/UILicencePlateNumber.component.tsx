@@ -17,18 +17,6 @@ interface Props {
 
 const UILicencePlateNumber = ({ ...pr }: Props) => {
 
-    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '')
-
-    const handleSelect = (option: string) => {
-        console.log('Выбрана опция:', option);
-    };
-
-    const onChancheNumberCar = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value.toUpperCase());
-
-        useStepsStore.getState().setNumberCar(e.currentTarget.value.toUpperCase());
-    }
-
     return (
         <>
             <div className={style['UILicencePlateNumber']}>

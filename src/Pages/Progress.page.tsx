@@ -13,7 +13,7 @@ const Progress = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => navigate('/payment'), 1500);
+        // setTimeout(() => navigate('/payment'), 1500);
     });
     return(
         <>
