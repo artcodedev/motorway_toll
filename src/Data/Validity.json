@@ -1,0 +1,29 @@
+
+{
+    "data": [
+        {
+            "value": "1day",
+            "title": "1 day - 18.9 €",
+            "price": "18.9"
+        },
+
+        {
+            "value": "10days",
+            "title": "10 days - 21.9 €",
+            "price": "21.9"
+        },
+
+        {
+            "value": "2months",
+            "title": "2 months - 48.9 €",
+            "price": "48.9"
+        },
+
+        {
+            "value": "1year",
+            "title": "1 year - 139.9 €",
+            "price": "139.9"
+        }
+
+    ]
+}

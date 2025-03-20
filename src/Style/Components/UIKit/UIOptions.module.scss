@@ -1,0 +1,51 @@
+
+
+.UIOptions {
+    width: 100%;
+    // margin-bottom: 12px;
+
+    &_title {
+        font-size: 12px;
+        color: #2F2D2E;
+        margin-bottom: 4px;
+
+        & > span {
+            color: #DC143C;
+        }
+    }
+
+    &_select {
+        width: 100%;
+        background: #fff;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #E6E6E7;
+        font-size: 14px;
+        padding: 10px;
+        font-family: SFPRO !important;
+        color: #2F2D2E;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none; 
+        -ms-appearance: none;
+        background-image: url('../../../Static/svg/arrow_down.svg');
+        background-repeat: no-repeat;
+        background-color: #fff;
+        background-position: calc(100% - 10px) center;
+        // padding: 8px 32px 8px 16px;
+        outline: none;
+        cursor: pointer;
+
+        &_flag {
+            width: 31px;
+            height: 24px;
+            border: 1px solid #E1E1E1;
+            border-radius: 6px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

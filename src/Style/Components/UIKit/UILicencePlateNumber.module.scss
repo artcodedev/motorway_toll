@@ -1,0 +1,44 @@
+// @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"; 
+
+
+
+
+.UILicencePlateNumber {
+
+    width: 100%;
+
+
+    // margin-bottom: 18px;
+
+    &_title {
+        font-size: 12px;
+        color: #2F2D2E;
+        margin-bottom: 4px;
+
+        &>span {
+            color: #DC143C;
+        }
+    }
+
+    &_inputs {
+
+        &_number {
+
+            display: flex;
+
+            &>input {
+                margin-left: 4px;
+                width: 100%;
+                background: #fff;
+                border: 1px solid #E6E6E7;
+                border-radius: 10px;
+                height: 40px;
+                color: #2F2D2E;
+                font-size: 14px;
+                padding: 0px 5px;
+                font-family: SFPRO !important;
+                box-sizing: border-box;
+            }
+        }
+    }
+}

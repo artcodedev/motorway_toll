@@ -1,0 +1,67 @@
+
+
+@import 'https://afeld.github.io/emoji-css/emoji.css'; 
+
+
+.UIOptionsNumberCar {
+    width: 100%;
+    // margin-bottom: 12px;
+
+    &_test {
+        max-width: 50px;
+    }
+
+    &_flag-ar {
+        background: #74ACDF;
+    }
+
+    &_flag-ar:before {
+        background: #fff;
+        width: 100%;
+        height: 33%;
+        top: 33.3%;
+    }
+
+    &_flag-ar:after {
+        color: #FCBF49;
+        content: "✹";
+        font-size: 0.8em;
+        top: calc(50% - 0.4em);
+        left: calc(50% - 0.45em);
+    }
+
+    &_select {
+        width: 100%;
+        background: #fff;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #E6E6E7;
+        font-size: 14px;
+        padding: 10px;
+        font-family: SFPRO !important;
+        color: #2F2D2E;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none; 
+        -ms-appearance: none;
+        background-image: url('../../../Static/svg/arrow_down.svg');
+        background-repeat: no-repeat;
+        background-color: #fff;
+        background-position: calc(100% - 10px) center;
+        padding: 8px 32px 8px 16px;
+        outline: none;
+        cursor: pointer;
+
+        &_flag {
+            width: 31px;
+            height: 24px;
+            border: 1px solid #E1E1E1;
+            border-radius: 6px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

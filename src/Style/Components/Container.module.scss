@@ -1,0 +1,17 @@
+
+
+.Container {
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+
+    &_main {
+        margin: auto 8px;
+        flex: 1 0 auto;
+    }
+    &_footer {
+        margin: auto 8px;
+    }
+}

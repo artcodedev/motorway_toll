@@ -1,0 +1,16 @@
+
+
+.UIDateInput {
+    width: 100%;
+
+    & > input {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #E6E6E7;
+        box-sizing: border-box;
+        padding: 10px;
+        color: #2F2D2E;
+        font-family: SFPRO !important;
+    }
+}
