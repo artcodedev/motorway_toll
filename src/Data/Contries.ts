@@ -305,7 +305,7 @@ export const countries = [
     { 
       code: "BY", 
       name: "Belarus", 
-      flag: "https://flagcdn.com/w40/by.png", 
+      flag: "https://flagcdn.com/w40/by.png",   
       isEU: true, 
       isEuroUnion: false, 
       prefix: "BY", 

@@ -21,8 +21,15 @@ const getMinDate = () => {
 
 const UIDateInput = () => {
 
-    const dateInputRef = useRef(null);
     const [date, setDate] = useState("");
+    const dateInputRef = useRef<HTMLInputElement | null>(null);
+    const handleShowPicker = () => {
+
+        if (dateInputRef.current) {
+          dateInputRef.current.showPicker();
+        }
+
+      };
 
     const dateChange = (e: any) => {
 
@@ -54,12 +61,13 @@ const UIDateInput = () => {
 
     }
 
-
     return (
         <>
             <div className={style['UIDateInput']}>
 
-                <input type='date' min={getMinDate()} value={date ? date : formatDateForInput(new Date())} onChange={dateChange} />
+                <div className={style['UIDateInput_but']} onClick={handleShowPicker}></div>
+
+                <input type='date' ref={dateInputRef} style={{userSelect: 'none'}} min={getMinDate()} value={date ? date : formatDateForInput(new Date())} onChange={dateChange} />
 
             </div>
         </>

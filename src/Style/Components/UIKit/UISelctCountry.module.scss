@@ -1,0 +1,78 @@
+.UISelectCountry {
+    position: relative;
+    font-size: 16px;
+    height: 40px;
+    border-radius: 10px;
+    width: 100%;
+    // border: 1px solid #E6E6E7;
+
+
+    
+
+    &_wrap {
+
+        width: 100%;
+
+        &>input {
+            margin-left: 4px;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #E6E6E7;
+            border-radius: 10px;
+            height: 40px;
+            color: #2F2D2E;
+            font-size: 14px;
+            padding: 0px 5px;
+            font-family: SFPRO !important;
+            box-sizing: border-box;
+        }
+
+
+        &_info {
+            width: 80px;
+            min-width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 130px;
+            text-align: left;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #E6E6E7;
+
+            &_res {
+                display: flex;
+
+                &>img {
+                    width: 31px;
+                    height: 24px;
+                    border: 1px solid #E6E6E7;
+                    border-radius: 6px;
+                }
+            }
+
+            &_svg {
+                &>img {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    &_items {
+        width: 100%;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 8px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+}

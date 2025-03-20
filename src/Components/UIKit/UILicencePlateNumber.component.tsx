@@ -7,6 +7,7 @@ import UIOptions from './UIOptions.component';
 import UIOptionsNumberCar from './UIOptionsNumberCar.component';
 
 import { useStepsStore } from "../../Story/story";
+import SelectCountry from '../SelectCountry';
 
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
     onClickInput: () => void
 }
 
-const UILicencePlateNumber = ({...pr}: Props) => {
+const UILicencePlateNumber = ({ ...pr }: Props) => {
 
     const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '')
 
@@ -42,13 +43,8 @@ const UILicencePlateNumber = ({...pr}: Props) => {
 
                     <div className={style['UILicencePlateNumber_inputs_number']}>
 
-                        <div style={{ maxWidth: '80px', width: '80px' }}>
+                        <SelectCountry error={pr.error} onClickInput={pr.onClickInput} />
 
-                            <UIDropdownOptionsNumberCar onSelect={handleSelect} />
-
-                        </div>
-
-                        <input style={ pr.error ? { border: '1px solid red' } : {}} onClick={pr.onClickInput} value={value} onChange={onChancheNumberCar}/>
                     </div>
                 </div>
 

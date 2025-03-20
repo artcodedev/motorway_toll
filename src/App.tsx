@@ -11,6 +11,7 @@ import Progress from './Pages/Progress.page';
 import Payment from './Pages/Payment.page';
 
 import AppTest from './Components/Test';
+import SelectCountry from './Components/SelectCountry';
 
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
         <Route path="/payment" element={<Payment />} />
 
 
-        <Route path="/test" element={<AppTest />} />
+        <Route path="/test" element={<SelectCountry />} />
 
       </Routes>
     </>
