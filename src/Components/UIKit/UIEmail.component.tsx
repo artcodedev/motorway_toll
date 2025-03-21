@@ -6,6 +6,7 @@ import style from '../../Style/Components/UIKit/UIEmail.module.scss';
 interface Props {
     title: string
     error: boolean
+    value: string
     onChange: (event: ChangeEvent<HTMLInputElement>) => void 
     onClick: () => void
 }
@@ -20,7 +21,7 @@ const UIEmail = ({...pr}: Props) => {
                     {pr.title}<span>*</span>
                 </div>
 
-                <input type='text' onChange={pr.onChange} onClick={pr.onClick} placeholder='youremail@gmail.com' style={pr.error ? {border: '1px solid red'} : {}}/>
+                <input type='text' onChange={pr.onChange} value={pr.value} onClick={pr.onClick} placeholder='youremail@gmail.com' style={pr.error ? {border: '1px solid red'} : {}}/>
 
             </div>
         </>

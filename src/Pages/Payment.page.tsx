@@ -21,7 +21,7 @@ const Payment = () => {
     const navigate = useNavigate();
 
     const [errorEmail, setErrorEmail] = useState<boolean>(false);
-    const [email, setEmail] = useState<string | null>(null);
+    const [email, setEmail] = useState<string | null>(useStepsStore.getState().email);
     const [errorPhone, setErrorPhone] = useState<boolean>(false);
     const [errorCheckBox, setErrorCheckBox] = useState<boolean>(false)
     const [check, setCheck] = useState<boolean>(true);
@@ -41,7 +41,11 @@ const Payment = () => {
     }
 
 
-    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
+    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        const value: string = e.currentTarget.value;
+        setEmail(value);
+        useStepsStore.getState().setEmail(value);
+    }
 
     const validateEmail = (email: string): boolean => {
         const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -150,7 +154,7 @@ const Payment = () => {
                     </div>
 
                     <div style={{ margin: '32px auto' }}>
-                        <UIEmail title='Email' error={errorEmail} onChange={onChangeEmail} onClick={() => setErrorEmail(false)} />
+                        <UIEmail title='Email' error={errorEmail} onChange={onChangeEmail} onClick={() => setErrorEmail(false)} value={email ? email : ''} />
 
                         <div style={{marginTop: '18px'}}>
                             

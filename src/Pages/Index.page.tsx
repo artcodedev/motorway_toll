@@ -188,6 +188,7 @@ const Index = () => {
             if (Validity.data[i].value === value) {
                 useStepsStore.getState().setPrice(Validity.data[i].price);
                 useStepsStore.getState().setTypePrice(Validity.data[i].title);
+                break
             }
         }
 

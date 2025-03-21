@@ -33,7 +33,7 @@ const SelectNumberPhone = ({...pr}: Props) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '');
+    const [value, setValue] = useState<string>(useStepsStore.getState().phone || '');
 
     const [selectedCountry, setSelectedCountry] = useState<CountryType | null>(null);
 
@@ -51,7 +51,10 @@ const SelectNumberPhone = ({...pr}: Props) => {
 
     const onChancheNumberCar = (e: ChangeEvent<HTMLInputElement>) => {
 
-        setValue(e.currentTarget.value.toLocaleUpperCase());
+        const value: string = e.currentTarget.value;
+        setValue(e.currentTarget.value);
+
+        useStepsStore.getState().setPhone(value)
 
         // save in global state
 

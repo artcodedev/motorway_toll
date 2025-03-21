@@ -14,6 +14,8 @@ export type StepsData = {
     price: string | null
     type_price: string | null
     flag: string | null
+    email: string | null
+    phone: string | null
 
     // country_code: string | null
 
@@ -28,6 +30,8 @@ export type StepsData = {
     setPrice: (data: string | null) => void
     setTypePrice: (data: string | null) => void
     setFlag: (data: string | null) => void
+    setEmail: (data: string | null) => void
+    setPhone: (data: string | null) => void
     // setCountryCode: (data: string | null) => void
 
 
@@ -48,6 +52,8 @@ export const useStepsStore = createStore<StepsData>()(
             price: null,
             type_price: null,
             flag: null,
+            email: '',
+            phone: '',
 
             setNumberCar: (q) => set(() => ({ number_car: q })),
             setVehicle: (q) => set(() => ({ vehicle: q })),
@@ -59,6 +65,8 @@ export const useStepsStore = createStore<StepsData>()(
             setPrice: (q) => set(() => ({ price: q })),
             setTypePrice: (q) => set(() => ({ type_price: q })),
             setFlag: (q) => set(() => ({ flag: q })),
+            setEmail: (q) => set(() => ({ email: q })),
+            setPhone: (q) => set(() => ({ phone: q }))
 
         }),
         { name: 'motorway' },
