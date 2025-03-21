@@ -201,6 +201,7 @@ const Index = () => {
         setDateInLocalStorage(true);
         useStepsStore.getState().setVehicle(Vehicle_details.data[0].value);
         useStepsStore.getState().setNumberCarPrefix(countries[0].prefix);
+        useStepsStore.getState().setFlag(countries[0].flag);
         useStepsStore.getState().setValidity(Validity.data[0].value);
         useStepsStore.getState().setTypePrice(Validity.data[0].title);
         useStepsStore.getState().setStartOfValidity(startOfValidityValue[0].title)
