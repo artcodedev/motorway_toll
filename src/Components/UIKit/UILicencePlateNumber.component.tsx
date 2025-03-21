@@ -1,17 +1,12 @@
 
 
-import { ChangeEvent, useState } from 'react';
 import style from '../../Style/Components/UIKit/UILicencePlateNumber.module.scss';
-import UIDropdownOptionsNumberCar from './UIDropdownOptionsNumberCar.component';
-import UIOptions from './UIOptions.component';
-import UIOptionsNumberCar from './UIOptionsNumberCar.component';
-
-import { useStepsStore } from "../../Story/story";
-import SelectCountry from '../SelectCountry';
+import SelectCountry from '../SelectCountry.component';
 
 
 interface Props {
     error: boolean
+    flag: string
     onClickInput: () => void
 }
 
@@ -31,7 +26,7 @@ const UILicencePlateNumber = ({ ...pr }: Props) => {
 
                     <div className={style['UILicencePlateNumber_inputs_number']}>
 
-                        <SelectCountry error={pr.error} onClickInput={pr.onClickInput} />
+                        <SelectCountry error={pr.error} onClickInput={pr.onClickInput} flag={pr.flag}/>
 
                     </div>
                 </div>

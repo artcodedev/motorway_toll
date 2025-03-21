@@ -28,7 +28,7 @@ const UIOptions = ({ ...pr }: Props) => {
 
                 <select
                     className={style['UIOptions_select']}
-                    value={pr.value}
+                    // value={pr.value}
                     onChange={pr.handleChange}
                 >
 

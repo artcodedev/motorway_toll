@@ -13,7 +13,7 @@ const ProgressCar = () => {
         const timer = setInterval(() => {
             if (progres != 260) setProgress(progres + 2.5);
 
-          }, 50);
+          }, 30);
         return () => {
             clearInterval(timer);
           };

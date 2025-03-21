@@ -9,9 +9,9 @@ import { Routes, Route } from 'react-router-dom';
 import Index from './Pages/Index.page';
 import Progress from './Pages/Progress.page';
 import Payment from './Pages/Payment.page';
+import Successful from './Pages/Successful.page';
 
-import AppTest from './Components/Test';
-import SelectCountry from './Components/SelectCountry';
+// import MyComponent from './Components/Test';
 
 
 const App = () => {
@@ -24,8 +24,13 @@ const App = () => {
         <Route path="/progress" element={<Progress />} />
         <Route path="/payment" element={<Payment />} />
 
+        <Route path="/successful" element={<Successful status={true}/>} />
 
-        <Route path="/test" element={<SelectCountry />} />
+        <Route path="/failed" element={<Successful status={false}/>} />
+
+
+
+        {/* <Route path="/test" element={<MyComponent />} /> */}
 
       </Routes>
     </>

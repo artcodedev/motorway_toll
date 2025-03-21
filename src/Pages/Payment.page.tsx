@@ -7,10 +7,54 @@ import TitlesHeader from '../Components/TitlesHeader.component';
 import UIButton from '../Components/UIKit/UIButton.component';
 import style from '../Style/Pages/Payment.module.scss'
 import edit from '../Static/svg/edit.svg';
+import logo_pay from '../Static/svg/logo_pay.svg';
+import { Link } from 'react-router-dom';
+import UIEmail from '../Components/UIKit/UIEmail.component';
+import { ChangeEvent, useEffect, useState } from 'react';
+import SelectCountry from '../Components/SelectCountry.component';
+import SelectNumberPhone from '../Components/SelectNumberPhone.component';
+import UICheckBoxLabel from '../Components/UIKit/UICheckBoxLabel.component';
+import { useStepsStore } from '../Story/story';
 
 const Payment = () => {
 
-    const onClickButton = () => { }
+    const [errorEmail, setErrorEmail] = useState<boolean>(false);
+    const [email, setEmail] = useState<string | null>(null);
+    const [errorPhone, setErrorPhone] = useState<boolean>(false);
+    const [errorCheckBox, setErrorCheckBox] = useState<boolean>(false)
+    const [check, setCheck] = useState<boolean>(true);
+
+    const [price, setPrice] = useState<string>('');
+
+    useEffect(() => {
+
+    });
+
+    const onClickChechBoxInput = () => {
+        setCheck(check ? false : true)
+        setErrorCheckBox(false);
+    }
+
+
+
+    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
+
+    const validateEmail = (email: string): boolean => {
+        const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return regex.test(email);
+    };
+
+    const onClickButton = () => {
+
+        if (!email || validateEmail(email)) {
+            setErrorEmail(true);
+            return;
+        }
+
+    }
+
+
+    const onClickInputPhone = () => { }
 
     return (
         <>
@@ -39,25 +83,26 @@ const Payment = () => {
                                 </div>
 
                                 <div className={style['Payment_wrapper_section_info_counts']}>
-                                    <span>1x</span><span>10 days</span>
+                                    <span>1x</span><span>{useStepsStore.getState().type_price}</span>
                                 </div>
 
                                 <div className={style['Payment_wrapper_section_info_time']}>
-                                    25.03.2025 - 03.04.2025 (23:59)
+
+                                    {`${useStepsStore.getState().start_date?.split('-').join('.')} - ${useStepsStore.getState().end_date?.split('-').join('.')} (23:59)`}
                                 </div>
 
                             </div>
 
                             <div className={style['Payment_wrapper_section_edit']}>
-                                <img src={edit} />
+                                <Link to='/'>
+                                    <img src={edit} />
+                                </Link>
                             </div>
 
                             <div className={style['Payment_wrapper_section_price']}>
-                                25.5 €
+                                {useStepsStore.getState().price} €
                             </div>
                         </div>
-
-
 
                         <div className={style['Payment_wrapper_section']}>
 
@@ -68,38 +113,43 @@ const Payment = () => {
                                 </div>
 
                                 <div className={style['Payment_wrapper_section_info_number']}>
-                                    {/* <div>
-                                        <img src='https://flagcdn.com/w40/tn.png' />
-                                    </div> */}
-                                    <img src='https://flagcdn.com/w40/tn.png' />
-                                    <div>(AL) 1231AB1</div>
+                                    <img src={useStepsStore.getState().flag?.toString()} />
+                                    <div>({useStepsStore.getState().number_car_prefix}) {useStepsStore.getState().number_car}</div>
                                 </div>
 
                             </div>
 
                             <div className={style['Payment_wrapper_section_edit']}>
-                                <img src={edit} />
+
+                                <Link to='/'>
+                                    <img src={edit} />
+                                </Link>
                             </div>
 
                             <div className={style['Payment_wrapper_section_price']}>
-                                25.5 €
+                                <img src={logo_pay} />
                             </div>
                         </div>
 
-
-
                         <div className={style['Payment_wrapper_section_total']}>
                             <div className={style['Payment_wrapper_section_total_txt']}>Total</div>
-                            <div className={style['Payment_wrapper_section_total_price']}>25.5 €</div>
+                            <div className={style['Payment_wrapper_section_total_price']}>{useStepsStore.getState().price} €</div>
                         </div>
-
-
 
                     </div>
 
                     <div style={{ margin: '32px auto' }}>
-                        email
+                        <UIEmail title='Email' error={errorEmail} onChange={onChangeEmail} onClick={() => setErrorEmail(false)} />
+
+                        <div style={{marginTop: '18px'}}>
+                            
+                            <SelectNumberPhone error={errorPhone} onClickInput={onClickInputPhone} />
+                        </div>
+
+                        <UICheckBoxLabel check={check} onClick={onClickChechBoxInput} error={errorCheckBox} />
                     </div>
+
+
 
                     <UIButton title='Pay online' onCLickButton={onClickButton} />
 

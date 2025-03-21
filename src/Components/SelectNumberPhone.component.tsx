@@ -1,9 +1,15 @@
+
+
 import { ChangeEvent, useState } from "react";
 import { countries } from '../Data/Contries'
 import arrow_down from '../Static/svg/arrow_down.svg'
 
-import style from '../Style/Components/UIKit/UISelctCountry.module.scss';
+import style from '../Style/Components/SelectNumberPhone.module.scss';
 import { useStepsStore } from "../Story/story";
+import $ from "jquery"
+import 'jquery-mask-plugin';
+import MaskInput from 'react-maskinput';
+import { PatternFormat } from 'react-number-format';
 
 
 interface CountryType {
@@ -23,11 +29,11 @@ interface Props {
     onClickInput: () => void
 }
 
-const SelectCountry = ({ ...pr }: Props) => {
+const SelectNumberPhone = ({...pr}: Props) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '')
+    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '');
 
     const [selectedCountry, setSelectedCountry] = useState<CountryType | null>(null);
 
@@ -44,30 +50,37 @@ const SelectCountry = ({ ...pr }: Props) => {
     };
 
     const onChancheNumberCar = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value.toUpperCase());
 
-        useStepsStore.getState().setNumberCar(e.currentTarget.value.toUpperCase());
+        setValue(e.currentTarget.value.toLocaleUpperCase());
+
+        // save in global state
+
     }
 
     return (
         <>
 
+            <div className={style['SelectNumberPhone']} style={{ width: '100%' }}>
 
-            <div className={style['UISelectCountry']} style={{ width: '100%' }}>
+                <div className={style['SelectNumberPhone_title']}>Phone number</div>
 
-                <div className={style['UISelectCountry_wrap']} style={{ display: 'flex', width: '100%' }} >
+                <div className={style['SelectNumberPhone_wrap']} style={{ display: 'flex', width: '100%' }} >
 
-                    <div className={style['UISelectCountry_wrap_info']} onClick={() => setIsOpen(true)}>
-                        <div className={style['UISelectCountry_wrap_info_res']}>
+                    <div className={style['SelectNumberPhone_wrap_info']} onClick={() => setIsOpen(true)}>
+                        <div className={style['SelectNumberPhone_wrap_info_res']}>
                             <img src={selectedCountry ? selectedCountry.flag : 'https://flagcdn.com/w40/be.png'} />
                         </div>
 
-                        <div className={style['UISelectCountry_wrap_svg']}>
+                        <div className={style['SelectNumberPhone_wrap_info_codeNumber']}>345</div>
+
+                        <div className={style['SelectNumberPhone_wrap_svg']}>
                             <img src={arrow_down} />
                         </div>
                     </div>
+                    {/* <PatternFormat format="(###) #### ###" allowEmptyFormatting mask="_" onChange={onChancheNumberCar}/> */}
 
-                    <input style={pr.error ? { border: '1px solid red' } : {}} onClick={pr.onClickInput} value={value} onChange={onChancheNumberCar} />
+                    {/* <MaskInput  maskChar="_" />; */}
+                    <input id='date' style={pr.error ? { border: '1px solid red' } : {}} onClick={pr.onClickInput} value={value} onChange={onChancheNumberCar} />
 
                 </div>
 
@@ -171,5 +184,4 @@ const SelectCountry = ({ ...pr }: Props) => {
     );
 }
 
-
-export default SelectCountry;
+export default SelectNumberPhone;

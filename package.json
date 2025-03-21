@@ -10,10 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/jquery": "^3.5.32",
+    "@types/jquery-mask-plugin": "^1.14.6",
+    "@types/react-input-mask": "^3.0.6",
+    "@types/react-maskedinput": "^4.0.10",
     "@types/react-router-dom": "^5.3.3",
+    "jquery": "^3.7.1",
+    "jquery-mask-plugin": "^1.14.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-flags-select": "^2.4.0",
+    "react-input-mask": "^2.0.4",
+    "react-maskedinput": "^4.0.1",
+    "react-maskinput": "^3.2.0",
+    "react-number-format": "^5.4.3",
     "react-router-dom": "^7.3.0",
     "sass": "^1.86.0"
   },

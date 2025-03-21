@@ -5,8 +5,6 @@ import style from '../Style/Components/Progress.module.scss';
 import { useNavigate } from 'react-router-dom';
 
 
-
-
 const ProgressBar = () => {
 
     const [progres, setProgress] = useState<number>(0);
@@ -18,7 +16,7 @@ const ProgressBar = () => {
 
             if (progres == 100) navigate('/payment');
 
-          }, 50);
+          }, 30);
         return () => {
             clearInterval(timer);
           };

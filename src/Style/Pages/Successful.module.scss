@@ -1,0 +1,122 @@
+.SuccessfulFailed {
+
+    &_title {
+        margin: 32px auto;
+
+        &_txt {
+            color: #2F2D2E;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 20px;
+        }
+    }
+
+    &_wrapper {
+        padding: 6px 12px;
+        background: #fff;
+        border: 1px solid #E6E6E7;
+        border-radius: 12px;
+
+        &_section {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E6E6E7;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+
+            &_price {
+                color: #6B6C6F;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            &_info {
+                min-width: 190px;
+                &_title {
+                    color: #2F2D2E;
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+
+                &_counts {
+                    margin-top: 8px;
+
+                    &>span {
+                        background: #F5F5F5;
+                        padding: 4px;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        font-weight: 500;
+                        font-family: SFPRO !important;
+                        margin-right: 8px;
+                    }
+
+                }
+
+                &_time {
+                    color: #6B6C6F;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin-top: 8px;
+                }
+
+                &_licence {
+                    color: #6B6C6F;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+
+                &_number {
+
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    margin-top: 4px;
+
+
+                    &>img {
+                        width: 30px;
+                        height: 22px;
+                        border-radius: 6px;
+                        overflow: hidden;
+                        margin-right: 7px;
+                        // & > img {
+                        //     width: 30px;
+                        //     height: 22px;
+                        //     border-radius: 6px;
+                        // }
+                    }
+
+                    &>div:nth-child(2) {
+                        color: #2F2D2E;
+                        font-weight: 500;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            &_total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 8px;
+
+                &_txt {
+                    color: #2F2D2E;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+
+                &_price {
+                    color: #6B6C6F;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+
+        }
+    }
+}
