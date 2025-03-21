@@ -8,7 +8,7 @@ import UIButton from '../Components/UIKit/UIButton.component';
 import style from '../Style/Pages/Payment.module.scss'
 import edit from '../Static/svg/edit.svg';
 import logo_pay from '../Static/svg/logo_pay.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UIEmail from '../Components/UIKit/UIEmail.component';
 import { ChangeEvent, useEffect, useState } from 'react';
 import SelectCountry from '../Components/SelectCountry.component';
@@ -17,6 +17,8 @@ import UICheckBoxLabel from '../Components/UIKit/UICheckBoxLabel.component';
 import { useStepsStore } from '../Story/story';
 
 const Payment = () => {
+
+    const navigate = useNavigate();
 
     const [errorEmail, setErrorEmail] = useState<boolean>(false);
     const [email, setEmail] = useState<string | null>(null);
@@ -28,13 +30,15 @@ const Payment = () => {
 
     useEffect(() => {
 
+        const num = useStepsStore.getState().number_car;
+
+        if (!num || num == null ) navigate('/')
     });
 
     const onClickChechBoxInput = () => {
         setCheck(check ? false : true)
         setErrorCheckBox(false);
     }
-
 
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value);
@@ -46,10 +50,17 @@ const Payment = () => {
 
     const onClickButton = () => {
 
-        if (!email || validateEmail(email)) {
-            setErrorEmail(true);
-            return;
+        if (email) {
+            
+            if (validateEmail(email)) {
+                console.log('send');
+
+                return;
+            }
         }
+
+
+        setErrorEmail(true);
 
     }
 
