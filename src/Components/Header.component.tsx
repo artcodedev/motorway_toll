@@ -11,7 +11,7 @@ const Header = () => {
             <div className={style['Header']}>
                 <div className={style['Header_wrap']}>
                     <div className={style['Header_wrap_logo']}>
-                        <Link to='/'>
+                        <Link to='/austria2'>
                             <img src={logo} />
                         </Link>
                     </div>

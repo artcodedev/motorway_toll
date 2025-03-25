@@ -10,7 +10,7 @@ interface Props {
 const UICheckBoxLabel = ({ ...pr }: Props) => {
 
     return (
-        <>1
+        <>
             <div className={style['UICheckBoxLabel']}>
                 <div className={style['UICheckBoxLabel_wrap']}>
 

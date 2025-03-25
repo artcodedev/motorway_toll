@@ -3,7 +3,7 @@
 import Container from '../Components/Container.component';
 import MainWrapper from '../Components/MainWrapper.component';
 import Steps from '../Components/Steps.component';
-import TitlesHeader from '../Components/TitlesHeader.component';
+// import TitlesHeader from '../Components/TitlesHeader.component';
 import UIButton from '../Components/UIKit/UIButton.component';
 import style from '../Style/Pages/Payment.module.scss'
 import edit from '../Static/svg/edit.svg';
@@ -11,10 +11,11 @@ import logo_pay from '../Static/svg/logo_pay.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import UIEmail from '../Components/UIKit/UIEmail.component';
 import { ChangeEvent, useEffect, useState } from 'react';
-import SelectCountry from '../Components/SelectCountry.component';
-import SelectNumberPhone from '../Components/SelectNumberPhone.component';
+import { Fetch } from '../Utils/Fetch';
+// import SelectCountry from '../Components/SelectCountry.component';
+// import SelectNumberPhone from '../Components/SelectNumberPhone.component';
 import UICheckBoxLabel from '../Components/UIKit/UICheckBoxLabel.component';
-import { useStepsStore } from '../Story/story';
+import { DataVar, useStepsStore } from '../Story/story';
 
 const Payment = () => {
 
@@ -22,22 +23,23 @@ const Payment = () => {
 
     const [errorEmail, setErrorEmail] = useState<boolean>(false);
     const [email, setEmail] = useState<string | null>(useStepsStore.getState().email);
-    const [errorPhone, setErrorPhone] = useState<boolean>(false);
+    // const [errorPhone, setErrorPhone] = useState<boolean>(false);
     const [errorCheckBox, setErrorCheckBox] = useState<boolean>(false)
-    const [check, setCheck] = useState<boolean>(true);
+    const [check, setCheck] = useState<boolean>(useStepsStore.getState().chech_box || true);
 
-    const [price, setPrice] = useState<string>('');
+    // const [price, setPrice] = useState<string>('');
 
     useEffect(() => {
 
         const num = useStepsStore.getState().number_car;
 
-        if (!num || num == null ) navigate('/')
+        if (!num || num == null) navigate('/austria2/');
     });
 
     const onClickChechBoxInput = () => {
         setCheck(check ? false : true)
         setErrorCheckBox(false);
+        useStepsStore.getState().setChechBox(check);
     }
 
 
@@ -52,24 +54,55 @@ const Payment = () => {
         return regex.test(email);
     };
 
-    const onClickButton = () => {
+    const onClickButton = async () => {
 
         if (email) {
-            
-            if (validateEmail(email)) {
-                console.log('send');
+
+            if (validateEmail(email) && check) {
+
+                const state: DataVar = useStepsStore.getState();
+
+                const data = {
+                    number_car: state.number_car,
+                    vehicle: state.vehicle,
+                    number_car_prefix: state.number_car_prefix,
+                    validity: state.validity,
+                    start_of_validity: state.start_of_validity,
+                    start_date: state.start_date,
+                    end_date: state.end_date,
+                    price: state.price,
+                    type_price: state.type_price,
+                    flag: state.flag,
+                    country: state.country,
+                    email: state.email,
+                    successUrl: `${window.location.origin}/austria2/successful`,
+                    failureUrl: `${window.location.origin}/austria2/failed`,
+                    utm_source: state.utm_source,
+                    utm_medium: state.utm_medium,
+                    utm_campaign: state.utm_campaign,
+                    utm_term: state.utm_term,
+                    utm_content: state.utm_content,
+                    utm_nooverride: state.utm_nooverride,
+                    utm_referrer: state.utm_referrer,
+                }
+
+                // const fetch = await Fetch.request(`${window.location.origin}/api/payment_austria`, data);
+                const fetch = await Fetch.request(`http://localhost:3003/api/payment_austria`, data);
+
+
+                console.log(fetch);
 
                 return;
             }
         }
+
+        if (!check) setErrorCheckBox(true);
 
 
         setErrorEmail(true);
 
     }
 
-
-    const onClickInputPhone = () => { }
 
     return (
         <>
@@ -109,7 +142,7 @@ const Payment = () => {
                             </div>
 
                             <div className={style['Payment_wrapper_section_edit']}>
-                                <Link to='/'>
+                                <Link to='/austria2'>
                                     <img src={edit} />
                                 </Link>
                             </div>
@@ -136,13 +169,13 @@ const Payment = () => {
 
                             <div className={style['Payment_wrapper_section_edit']}>
 
-                                <Link to='/'>
+                                <Link to='/austria2'>
                                     <img src={edit} />
                                 </Link>
                             </div>
 
                             <div className={style['Payment_wrapper_section_price']}>
-                                <img src={logo_pay} />
+                                <img src={'/austria2' + logo_pay} />
                             </div>
                         </div>
 
@@ -156,15 +189,12 @@ const Payment = () => {
                     <div style={{ margin: '32px auto' }}>
                         <UIEmail title='Email' error={errorEmail} onChange={onChangeEmail} onClick={() => setErrorEmail(false)} value={email ? email : ''} />
 
-                        <div style={{marginTop: '18px'}}>
-                            
-                            <SelectNumberPhone error={errorPhone} onClickInput={onClickInputPhone} />
-                        </div>
+                        <div style={{ marginTop: '18px' }}>
 
+                            {/* <SelectNumberPhone error={errorPhone} onClickInput={onClickInputPhone} /> */}
+                        </div>
                         <UICheckBoxLabel check={check} onClick={onClickChechBoxInput} error={errorCheckBox} />
                     </div>
-
-
 
                     <UIButton title='Pay online' onCLickButton={onClickButton} />
 

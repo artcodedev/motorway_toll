@@ -1,0 +1,20 @@
+
+.UIWhatsAppButton {
+    width: 100%;
+    background: #20b858;
+    border: none;
+    border-radius: 200px;
+    color: #fff;
+    font-size: 14px;
+    height: 46px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+
+    & > span {
+        margin-left: 10px;
+    }
+}

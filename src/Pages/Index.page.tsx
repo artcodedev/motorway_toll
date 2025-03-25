@@ -17,6 +17,7 @@ import { useStepsStore } from '../Story/story';
 import { useNavigate } from 'react-router-dom';
 
 import { countries } from '../Data/Contries'
+import SelectCountry from '../Components/SelectCountry.component';
 
 
 
@@ -70,10 +71,11 @@ const formatDateForInput = (date: string | number | Date) => {
 const Index = () => {
 
     const [selectDate, setSelectDate] = useState<boolean>(false);
-    const [selected, setSelected] = useState("");
+    // const [selected, setSelected] = useState("");
     const [error, setError] = useState<boolean>(false);
+    const [flag, setFlag] = useState<string>('');
 
-    const [typeTime, setTimeTime] = useState<string>('')
+    // const [typeTime, setTimeTime] = useState<string>('')
 
     const date_now = new Date();
 
@@ -84,14 +86,13 @@ const Index = () => {
 
     const dateS = new Date(+new Date() + 86400000).getDate().toString();
 
-
     const setDateInLocalStorage = (t: boolean, s: boolean = false) => {
         const vehiclePeriod = useStepsStore.getState().validity;
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        let selectedDate  = new Date(date_now.getFullYear(), parseInt(monthT) - 1, t ? parseInt(dateT) : parseInt(dateT) + 1);
+        let selectedDate = new Date(date_now.getFullYear(), parseInt(monthT) - 1, t ? parseInt(dateT) : parseInt(dateT) + 1);
 
         if (s) {
             const date = useStepsStore.getState().start_date?.split('-');
@@ -100,10 +101,6 @@ const Index = () => {
             }
 
         }
-
-        // const selectedDate = new Date(parseInt(date[2]), parseInt(date[1]) - 1, t ? parseInt(dateT) : parseInt(dateT) + 1);
-
-        // const selectedDate = new Date(date_now.getFullYear(), parseInt(monthT) - 1, t ? parseInt(dateT) : parseInt(dateT) + 1);
 
         const finalDate = selectedDate < today ? today : selectedDate;
 
@@ -120,7 +117,6 @@ const Index = () => {
 
         useStepsStore.getState().setStartDate(startDateStr_spl)
         useStepsStore.getState().setEndDate(endDate_format_spl)
-
 
     }
 
@@ -141,9 +137,11 @@ const Index = () => {
 
     const handleChangeDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
-        console.log(e.currentTarget.value)
-
-        if (e.currentTarget.value === '3') { setSelectDate(true) }
+        if (e.currentTarget.value === '3') {
+            setSelectDate(true);
+            setDateInLocalStorage(true)
+            useStepsStore.getState().setStartOfValidity(startOfValidityValue[2].title);
+        }
         if (e.currentTarget.value === '1') {
 
             setDateInLocalStorage(true)
@@ -166,7 +164,7 @@ const Index = () => {
 
         if (val) {
 
-            if (val.length) { navigate('/progress'); return; }
+            if (val.length) { navigate('/austria2/progress'); return; }
 
         }
 
@@ -182,31 +180,89 @@ const Index = () => {
 
         const value = e.currentTarget.value;
 
-        console.log(value);
+        console.log(value)
 
         for (let i = 0; i < Validity.data.length; i++) {
             if (Validity.data[i].value === value) {
+                console.log(Validity.data[i].price);
                 useStepsStore.getState().setPrice(Validity.data[i].price);
                 useStepsStore.getState().setTypePrice(Validity.data[i].title);
                 break
             }
         }
 
-        useStepsStore.getState().setValidity(e.currentTarget.value);
+        useStepsStore.getState().setValidity(value);
 
-        setDateInLocalStorage(typeTime === '1' ? true: false, true );
+        const vehiclePeriod = useStepsStore.getState().validity;
+
+        const isIOSSafari = /iPhone|iPad|iPod/.test(navigator.userAgent)
+            && !navigator.userAgent.includes('Chrome')
+            && !navigator.userAgent.includes('CriOS')
+
+        let selectedDate;
+
+        const start_date = useStepsStore.getState().start_date;
+
+        if (start_date) {
+
+            if (isIOSSafari) {
+                const [day,month, year] = start_date.split('-').map(Number);
+
+                selectedDate = new Date(year, month - 1, day + 1);
+            } else {
+                const [ day, month, year] = start_date.split('-').map(Number);
+          
+                selectedDate = new Date(year,  month - 1, day);
+            }
+        } else {
+            selectedDate = new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate() + 1);
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const finalDate = selectedDate < today ? today : selectedDate
+
+        const endDate = calculateEndDate(finalDate, vehiclePeriod);
+
+        const startDateStr = formatDateForInput(finalDate);
+
+        const endDate_format = endDate ? formatDateForInput(endDate) : ''
+
+        const startDateStr_t = startDateStr.split('-');
+
+        const startDateStr_spl = `${startDateStr_t[2]}-${startDateStr_t[1]}-${startDateStr_t[0]}`;
+        const endDate_format_t = endDate_format.split('-');
+        const endDate_format_spl = `${endDate_format_t[2]}-${endDate_format_t[1]}-${endDate_format_t[0]}`;
+
+        useStepsStore.getState().setStartDate(startDateStr_spl)
+        useStepsStore.getState().setEndDate(endDate_format_spl)
+
+        // setDateInLocalStorage(typeTime === '1' ? true: false, true );
     }
 
     useEffect(() => {
 
+        const data = useStepsStore.getState();
+
+        setFlag(data.flag ? data.flag : countries[0].flag);
+
+        data.setPrice(Validity.data[0].price);
+        data.setValidity(Validity.data[0].value);
+        data.setTypePrice( Validity.data[0].title);
+        data.setVehicle(Vehicle_details.data[0].value);
+
+        data.setCountry(data.country ? data.country : countries[0].name);
+
+        data.setFlag(data.flag ? data.flag : countries[0].flag);
+
+        data.setNumberCarPrefix(data.number_car_prefix ? data.number_car_prefix : countries[0].prefix);
+
         setDateInLocalStorage(true);
-        useStepsStore.getState().setVehicle(Vehicle_details.data[0].value);
-        useStepsStore.getState().setNumberCarPrefix(countries[0].prefix);
-        useStepsStore.getState().setFlag(countries[0].flag);
-        useStepsStore.getState().setValidity(Validity.data[0].value);
-        useStepsStore.getState().setTypePrice(Validity.data[0].title);
-        useStepsStore.getState().setStartOfValidity(startOfValidityValue[0].title)
-    });
+
+        if (data.start_date == null) {setDateInLocalStorage(true);}
+
+    }, []);
 
 
     return (
@@ -227,7 +283,7 @@ const Index = () => {
                         </div>
 
                         <div style={{ marginBottom: '18px' }}>
-                            <UILicencePlateNumber error={error} onClickInput={() => setError(false)} flag={countries[0].flag} />
+                            <UILicencePlateNumber error={error} onClickInput={() => setError(false)} flag={flag} />
                         </div>
 
                         <div style={{ marginBottom: '18px' }}>

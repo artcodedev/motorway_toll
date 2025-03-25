@@ -6,10 +6,8 @@ import arrow_down from '../Static/svg/arrow_down.svg'
 
 import style from '../Style/Components/SelectNumberPhone.module.scss';
 import { useStepsStore } from "../Story/story";
-import $ from "jquery"
-import 'jquery-mask-plugin';
-import MaskInput from 'react-maskinput';
-import { PatternFormat } from 'react-number-format';
+
+
 
 
 interface CountryType {
@@ -55,8 +53,6 @@ const SelectNumberPhone = ({...pr}: Props) => {
         setValue(e.currentTarget.value);
 
         useStepsStore.getState().setPhone(value)
-
-        // save in global state
 
     }
 

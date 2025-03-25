@@ -8,7 +8,7 @@ interface DropdownProps {
 
 const UIDropdownOptionsNumberCar: React.FC<DropdownProps> = ({ onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  // const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [selectedOptionUrl, setSelectedOptionUrl] = useState<string | null>(null);
 
 
@@ -18,7 +18,7 @@ const UIDropdownOptionsNumberCar: React.FC<DropdownProps> = ({ onSelect }) => {
 
   const handleOptionClick = (option: string, url: string) => {
 
-    setSelectedOption(option);
+    // setSelectedOption(option);
     setSelectedOptionUrl(url);
     onSelect(option);
     setIsOpen(false);

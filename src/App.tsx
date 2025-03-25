@@ -10,6 +10,7 @@ import Index from './Pages/Index.page';
 import Progress from './Pages/Progress.page';
 import Payment from './Pages/Payment.page';
 import Successful from './Pages/Successful.page';
+import Failed from './Pages/Failed.page';
 
 // import MyComponent from './Components/Test';
 
@@ -20,17 +21,15 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/progress" element={<Progress />} />
-        <Route path="/payment" element={<Payment />} />
 
-        <Route path="/successful" element={<Successful status={true}/>} />
+        <Route path="/austria2/" element={<Index />} />
+        <Route path="/austria2/progress" element={<Progress />} />
+        <Route path="/austria2/payment" element={<Payment />} />
 
-        <Route path="/failed" element={<Successful status={false}/>} />
+        <Route path="/austria2/successful" element={<Successful status={true} />} />
 
+        <Route path="/austria2/failed" element={<Failed />} />
 
-
-        {/* <Route path="/test" element={<MyComponent />} /> */}
 
       </Routes>
     </>

@@ -17,7 +17,7 @@ const TitlesHeader = () => {
 
                             <div className={style['TitlesHeader_wrap_uTxt_wrapD_flag']}>
 
-                                <img src={austria_flag} />
+                                <img src={'/austria2' + austria_flag} />
 
                             </div>
 
@@ -27,7 +27,7 @@ const TitlesHeader = () => {
 
                         <div className={style['TitlesHeader_wrap_uTxt_wrapP']}>
                             <div className={style['TitlesHeader_wrap_uTxt_wrapP_uText']}>
-                                Online toll calculator
+                                Online E-Vignette
                             </div>
 
                             <div className={style['TitlesHeader_wrap_uTxt_wrapP_dText']}>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { countries } from '../Data/Contries'
 import arrow_down from '../Static/svg/arrow_down.svg'
 
@@ -28,7 +28,8 @@ const SelectCountry = ({ ...pr }: Props) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '')
+    const [value, setValue] = useState<string>(useStepsStore.getState().number_car || '');
+    const [placeholder, setPlaceholder] = useState<string>('')
 
     const [selectedCountry, setSelectedCountry] = useState<CountryType | null>(null);
 
@@ -40,12 +41,14 @@ const SelectCountry = ({ ...pr }: Props) => {
     const nonEuCountries = filteredCountries.filter((country) => !country.isEU);
 
     const handleSelect = (country: CountryType) => {
-        console.log(country.code);
 
         useStepsStore.getState().setNumberCarPrefix(country.code);
         useStepsStore.getState().setFlag(country.flag);
+        useStepsStore.getState().setCountry(country.name);
+        setPlaceholder(country.placeholder);
         setSelectedCountry(country);
         setIsOpen(false);
+        
     };
 
     const onChancheNumberCar = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +56,16 @@ const SelectCountry = ({ ...pr }: Props) => {
 
         useStepsStore.getState().setNumberCar(e.currentTarget.value.toUpperCase());
     }
+
+    useEffect(() => {
+        const placeholder = filteredCountries.filter((country) => useStepsStore.getState().number_car_prefix === country.prefix);
+
+        if (placeholder.length) {
+            const pla = placeholder[0]['placeholder'];
+            setPlaceholder(pla ? pla : '');
+        }
+    }
+    );
 
     return (
         <>
@@ -72,7 +85,7 @@ const SelectCountry = ({ ...pr }: Props) => {
                         </div>
                     </div>
 
-                    <input style={pr.error ? { border: '1px solid red' } : {}} onClick={pr.onClickInput} value={value} onChange={onChancheNumberCar} />
+                    <input style={pr.error ? { border: '1px solid red' } : {}} placeholder={placeholder} onClick={pr.onClickInput} value={value} onChange={onChancheNumberCar} />
 
                 </div>
 

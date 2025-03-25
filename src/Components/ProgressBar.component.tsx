@@ -14,7 +14,7 @@ const ProgressBar = () => {
         const timer = setInterval(() => {
             if (progres != 100) setProgress(progres + 1);
 
-            if (progres == 100) navigate('/payment');
+            if (progres == 100) navigate('/austria2/payment');
 
           }, 30);
         return () => {

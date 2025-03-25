@@ -105,10 +105,6 @@ const UIDateInput = () => {
 
         const startDateStr = formatDateForInput(finalDate);
 
-        console.log(startDateStr)
-
-        console.log(endDate)
-
         const endDate_format = endDate ? formatDateForInput(endDate) : ''
 
         const startDateStr_t = startDateStr.split('-');

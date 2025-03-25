@@ -16,7 +16,7 @@ const Footer = () => {
 
                     <div className={style['Footer_wrap_icons']}>
                         {[visa, mastercard, amex, apple_pay].map((e) => <div>
-                            <img src={e} />
+                            <img src={'/austria' + e} />
                         </div>)}
                     </div>
 
