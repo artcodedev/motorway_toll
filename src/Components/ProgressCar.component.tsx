@@ -1,7 +1,7 @@
 
 
 import style from '../Style/Components/ProgressCar.module.scss';
-import car from '../Static/svg/car.svg';
+// import car from '../Static/svg/car.svg';
 import { useEffect, useState } from 'react';
 
 const ProgressCar = () => {
@@ -23,7 +23,7 @@ const ProgressCar = () => {
         <>
             <div className={style['ProgressCar']}>
                 <div className={style['ProgressCar_wrap']}>
-                    <img src={car} style={{marginLeft: `${progres}px`}}/>
+                    <img src={'svg/car.svg'} style={{marginLeft: `${progres}px`}}/>
                 </div>
             </div>
         </>

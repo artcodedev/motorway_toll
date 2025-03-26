@@ -2,11 +2,6 @@
 
 import style from '../Style/Components/Footer.module.scss';
 
-import apple_pay from '../Static/svg/apple_pay.svg';
-import amex from '../Static/svg/amex.svg';
-import visa from '../Static/svg/visa.svg';
-import mastercard from '../Static/svg/mastercard.svg';
-
 const Footer = () => {
 
     return (
@@ -15,8 +10,9 @@ const Footer = () => {
                 <div className={style['Footer_wrap']}>
 
                     <div className={style['Footer_wrap_icons']}>
-                        {[visa, mastercard, amex, apple_pay].map((e) => <div>
-                            <img src={'/austria' + e} />
+
+                        {['svg/visa.svg', 'svg/mastercard.svg', 'svg/amex.svg', 'svg/apple_pay.svg'].map((e) => <div>
+                            <img src={`${window.location.origin}/austria2/${e}`} />
                         </div>)}
                     </div>
 
@@ -31,12 +27,12 @@ const Footer = () => {
 
                     <div className={style['Footer_wrap_PrivacyTerms']}>
                         <div className={style['Footer_wrap_PrivacyTerms_link']}>
-                            <a href="#" target="_blank">
+                            <a href="https://tollroad.online/politics/privacy-policy.html" target="_blank">
                                 Privacy policy
                             </a>
                         </div>
                         <div className={style['Footer_wrap_PrivacyTerms_link']}>
-                            <a href="#" target="_blank">
+                            <a href="https://tollroad.online/politics/terms-conditions.html" target="_blank">
                                 Terms and conditions
                             </a>
                         </div>

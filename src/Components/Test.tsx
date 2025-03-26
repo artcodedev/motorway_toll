@@ -100,3 +100,44 @@
 // };
 
 // export default MyComponent;
+
+
+
+// import React, { useRef } from 'react';
+
+// const Test: React.FC = () => {
+//   const dateInputRef = useRef<HTMLInputElement>(null);
+
+//   const handleShowPicker = () => {
+//     if (dateInputRef.current) {
+//       dateInputRef.current.showPicker();
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <input type="date" ref={dateInputRef} />
+//       <button onClick={handleShowPicker}>Show Date Picker</button>
+//     </div>
+//   );
+// };
+
+// export default Test;
+
+
+import React from 'react';
+// import DatePicker from 'react-datepicker';
+import UIDateInput from './UIKit/UIDateInput.component';
+
+
+const Test: React.FC = () => {
+    // const [startDate, setStartDate] = useState<Date | null>(null);
+
+    return (
+        <div>
+           < UIDateInput />
+        </div>
+    );
+};
+
+export default Test;

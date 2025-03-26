@@ -17,9 +17,10 @@ import { useStepsStore } from '../Story/story';
 import { useNavigate } from 'react-router-dom';
 
 import { countries } from '../Data/Contries'
-import SelectCountry from '../Components/SelectCountry.component';
+// import ReactGA from "react-ga4";
+// import SelectCountry from '../Components/SelectCountry.component';
 
-
+declare global { interface Window { ym: any } }
 
 export const calculateEndDate = (startDate: string | number | Date, period: any) => {
     const date = new Date(startDate);
@@ -158,34 +159,94 @@ const Index = () => {
         if (e.currentTarget.value !== '3') { setSelectDate(false) }
     }
 
+
     const onClickButton = () => {
 
         const val: string | null = useStepsStore.getState().number_car;
+        const prefix: string | null = useStepsStore.getState().number_car_prefix
 
         if (val) {
 
-            if (val.length) { navigate('/austria2/progress'); return; }
+            if (val.length && prefix != null) {
 
+                const state = useStepsStore.getState();
+
+                if (state.validity === '1year') {
+                    state.setEndDate('31-01-2026');
+                }
+
+                window.ym(99185149, 'reachGoal', '2-carinfo');
+                navigate('/austria2/progress'); return;
+            }
+
+        } else { setError(true); }
+    }
+
+
+    const changePrice = (value: string) => {
+
+        const period = useStepsStore.getState().validity;
+
+        for (let i = 0; i < Vehicle_details.data.length; i++) {
+            if (Vehicle_details.data[i].value === value) {
+
+                console.log(value)
+
+                console.log(Vehicle_details.data[i])
+
+                for (let s = 0; s < Vehicle_details.data[i].data.length; s++) {
+                    console.log(Vehicle_details.data[i].data[s].value === period)
+                    if (Vehicle_details.data[i].data[s].value === period) {
+                        useStepsStore.getState().setPrice(Vehicle_details.data[i].data[s].price);
+                        break
+                    }
+                }
+
+                break
+            }
         }
-
-        setError(true);
     }
 
 
     const setTypeAvto = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        useStepsStore.getState().setVehicle(e.currentTarget.value);
+
+        const value = e.currentTarget.value;
+        changePrice(value)
+        // const period = useStepsStore.getState().validity;
+
+        useStepsStore.getState().setVehicle(value);
+
+        // for (let i = 0; i < Vehicle_details.data.length; i++) {
+        //     if (Vehicle_details.data[i].value === value) {
+
+        //         console.log(value)
+
+        //         console.log(Vehicle_details.data[i])
+
+        //         for (let s = 0; s < Vehicle_details.data[i].data.length; s++) {
+        //             console.log(Vehicle_details.data[i].data[s].value === period)
+        //             if (Vehicle_details.data[i].data[s].value === period) {
+        //                 useStepsStore.getState().setPrice(Vehicle_details.data[i].data[s].price);
+        //                 break
+        //             }
+        //         }
+
+        //         break
+        //     }
+        // }
+
     }
 
     const setTypeTime = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
         const value = e.currentTarget.value;
 
-        console.log(value)
+        console.log('212121212')
 
         for (let i = 0; i < Validity.data.length; i++) {
             if (Validity.data[i].value === value) {
                 console.log(Validity.data[i].price);
-                useStepsStore.getState().setPrice(Validity.data[i].price);
+                // useStepsStore.getState().setPrice(Validity.data[i].price);
                 useStepsStore.getState().setTypePrice(Validity.data[i].title);
                 break
             }
@@ -206,13 +267,13 @@ const Index = () => {
         if (start_date) {
 
             if (isIOSSafari) {
-                const [day,month, year] = start_date.split('-').map(Number);
+                const [day, month, year] = start_date.split('-').map(Number);
 
                 selectedDate = new Date(year, month - 1, day + 1);
             } else {
-                const [ day, month, year] = start_date.split('-').map(Number);
-          
-                selectedDate = new Date(year,  month - 1, day);
+                const [day, month, year] = start_date.split('-').map(Number);
+
+                selectedDate = new Date(year, month - 1, day);
             }
         } else {
             selectedDate = new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate() + 1);
@@ -238,6 +299,10 @@ const Index = () => {
         useStepsStore.getState().setStartDate(startDateStr_spl)
         useStepsStore.getState().setEndDate(endDate_format_spl)
 
+        const vehile = useStepsStore.getState().vehicle;
+
+        if (vehile) changePrice(vehile);
+
         // setDateInLocalStorage(typeTime === '1' ? true: false, true );
     }
 
@@ -245,22 +310,22 @@ const Index = () => {
 
         const data = useStepsStore.getState();
 
-        setFlag(data.flag ? data.flag : countries[0].flag);
+        setFlag(data.flag ? data.flag : "https://tollroad.online/austria2/svg/non_flag.png");
 
         data.setPrice(Validity.data[0].price);
         data.setValidity(Validity.data[0].value);
-        data.setTypePrice( Validity.data[0].title);
+        data.setTypePrice(Validity.data[0].title);
         data.setVehicle(Vehicle_details.data[0].value);
 
         data.setCountry(data.country ? data.country : countries[0].name);
 
-        data.setFlag(data.flag ? data.flag : countries[0].flag);
+        // data.setFlag(data.flag ? data.flag : countries[0].flag);
 
-        data.setNumberCarPrefix(data.number_car_prefix ? data.number_car_prefix : countries[0].prefix);
+        data.setNumberCarPrefix(data.number_car_prefix ? data.number_car_prefix : null);
 
         setDateInLocalStorage(true);
 
-        if (data.start_date == null) {setDateInLocalStorage(true);}
+        if (data.start_date == null) { setDateInLocalStorage(true); }
 
     }, []);
 

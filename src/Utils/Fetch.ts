@@ -12,7 +12,7 @@ export class Fetch {
 
         });
 
-        return await response.text();
+        return await response.json();
 
     } 
 

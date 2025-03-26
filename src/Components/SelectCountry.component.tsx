@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { countries } from '../Data/Contries'
-import arrow_down from '../Static/svg/arrow_down.svg'
+// import arrow_down from '../Static/svg/arrow_down.svg'
 
 import style from '../Style/Components/UIKit/UISelctCountry.module.scss';
 import { useStepsStore } from "../Story/story";
@@ -81,7 +81,7 @@ const SelectCountry = ({ ...pr }: Props) => {
                         </div>
 
                         <div className={style['UISelectCountry_wrap_svg']}>
-                            <img src={arrow_down} />
+                            <img src={`${window.location.origin}/austria2/svg/arrow_down.svg`} />
                         </div>
                     </div>
 

@@ -38,3 +38,9 @@ dropdown {
 .dropdown-list-item:hover {
   background-color: #f0f0f0;
 }
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

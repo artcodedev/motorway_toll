@@ -1,7 +1,7 @@
 
 
 import style from '../Style/Components/TitlesHeader.module.scss';
-import austria_flag from '../Static/svg/austria.svg';
+// import austria_flag from '../Static/svg/austria.svg';
 
 const TitlesHeader = () => {
     return (
@@ -17,7 +17,7 @@ const TitlesHeader = () => {
 
                             <div className={style['TitlesHeader_wrap_uTxt_wrapD_flag']}>
 
-                                <img src={'/austria2' + austria_flag} />
+                                <img src={`${window.location.origin}/austria2/svg/austria.svg`} />
 
                             </div>
 
@@ -27,7 +27,7 @@ const TitlesHeader = () => {
 
                         <div className={style['TitlesHeader_wrap_uTxt_wrapP']}>
                             <div className={style['TitlesHeader_wrap_uTxt_wrapP_uText']}>
-                                Online E-Vignette
+                                Online Vignette
                             </div>
 
                             <div className={style['TitlesHeader_wrap_uTxt_wrapP_dText']}>

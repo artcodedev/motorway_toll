@@ -6,8 +6,8 @@ import Steps from '../Components/Steps.component';
 // import TitlesHeader from '../Components/TitlesHeader.component';
 import UIButton from '../Components/UIKit/UIButton.component';
 import style from '../Style/Pages/Payment.module.scss'
-import edit from '../Static/svg/edit.svg';
-import logo_pay from '../Static/svg/logo_pay.svg';
+// import edit from '../Static/svg/edit.svg';
+// import logo_pay from '../Static/svg/logo_pay.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import UIEmail from '../Components/UIKit/UIEmail.component';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -16,6 +16,19 @@ import { Fetch } from '../Utils/Fetch';
 // import SelectNumberPhone from '../Components/SelectNumberPhone.component';
 import UICheckBoxLabel from '../Components/UIKit/UICheckBoxLabel.component';
 import { DataVar, useStepsStore } from '../Story/story';
+import UIButtonProgress from '../Components/UIKit/IUButtonProgress';
+
+
+interface ResponseData {
+    url: string
+    order_id: string
+    status: string
+}
+
+interface Response {
+    status: string
+    data: ResponseData
+}
 
 const Payment = () => {
 
@@ -26,8 +39,18 @@ const Payment = () => {
     // const [errorPhone, setErrorPhone] = useState<boolean>(false);
     const [errorCheckBox, setErrorCheckBox] = useState<boolean>(false)
     const [check, setCheck] = useState<boolean>(useStepsStore.getState().chech_box || true);
+    const [progress, setProgress] = useState<boolean>(false);
 
     // const [price, setPrice] = useState<string>('');
+
+    // useEffect(() => {
+
+    //     const state = useStepsStore.getState();
+
+    //     if (state.validity === '1year') {
+    //         state.setEndDate('31-01-2026')
+    //     }
+    // }, []);
 
     useEffect(() => {
 
@@ -41,7 +64,6 @@ const Payment = () => {
         setErrorCheckBox(false);
         useStepsStore.getState().setChechBox(check);
     }
-
 
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         const value: string = e.currentTarget.value;
@@ -58,7 +80,13 @@ const Payment = () => {
 
         if (email) {
 
+            console.log(1)
+
+            if (!validateEmail(email)) setErrorEmail(true);
+
             if (validateEmail(email) && check) {
+
+                console.log(2)
 
                 const state: DataVar = useStepsStore.getState();
 
@@ -85,24 +113,28 @@ const Payment = () => {
                     utm_nooverride: state.utm_nooverride,
                     utm_referrer: state.utm_referrer,
                 }
+    
+                window.ym(99185149, 'reachGoal', 's2-gotopay');
+                
+                setProgress(true);
 
-                // const fetch = await Fetch.request(`${window.location.origin}/api/payment_austria`, data);
-                const fetch = await Fetch.request(`http://localhost:3003/api/payment_austria`, data);
+                const fetch: Response = await Fetch.request(`${window.location.origin}/api/payment_austria`, data);
+                // const fetch: Response = await Fetch.request(`http://localhost:3003/api/payment_austria`, data);
 
-
-                console.log(fetch);
+                if (fetch.status === 'ok') {
+                    window.location.href = fetch.data.url;
+                } else {
+                    navigate('/austria2');
+                    useStepsStore.getState().setNumberCar('');
+                }
 
                 return;
             }
-        }
+        } else {setErrorEmail(true);}
 
         if (!check) setErrorCheckBox(true);
 
-
-        setErrorEmail(true);
-
     }
-
 
     return (
         <>
@@ -143,7 +175,7 @@ const Payment = () => {
 
                             <div className={style['Payment_wrapper_section_edit']}>
                                 <Link to='/austria2'>
-                                    <img src={edit} />
+                                    <img src={'svg/edit.svg'} />
                                 </Link>
                             </div>
 
@@ -170,12 +202,12 @@ const Payment = () => {
                             <div className={style['Payment_wrapper_section_edit']}>
 
                                 <Link to='/austria2'>
-                                    <img src={edit} />
+                                    <img src={'svg/edit.svg'} />
                                 </Link>
                             </div>
 
                             <div className={style['Payment_wrapper_section_price']}>
-                                <img src={'/austria2' + logo_pay} />
+                                <img src={'svg/logo_pay.svg'} />
                             </div>
                         </div>
 
@@ -196,7 +228,7 @@ const Payment = () => {
                         <UICheckBoxLabel check={check} onClick={onClickChechBoxInput} error={errorCheckBox} />
                     </div>
 
-                    <UIButton title='Pay online' onCLickButton={onClickButton} />
+                    {progress ? <UIButtonProgress /> : <UIButton title='Pay online' onCLickButton={onClickButton} />}
 
                 </MainWrapper>
 

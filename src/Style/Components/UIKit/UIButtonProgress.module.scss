@@ -1,0 +1,16 @@
+
+
+.UIButtonProgress {
+    width: 100%;
+    background: #0171D3;
+    border: none;
+    border-radius: 200px;
+    color: #fff;
+    font-size: 14px;
+    height: 46px;
+    cursor: pointer;
+
+    & > svg {
+        max-height: 40px;
+    }
+}

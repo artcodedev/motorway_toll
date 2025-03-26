@@ -1,14 +1,56 @@
-
-
 {
     "data": [
         {
             "value": "Car <3.5 tons",
-            "title": "Car <3.5 tons"
+            "title": "Car <3.5 tons",
+            "data": [
+                {
+                    "value": "1day",
+                    "title": "1 day",
+                    "price": "18.9"
+                },
+                {
+                    "value": "10days",
+                    "title": "10 days",
+                    "price": "21.9"
+                },
+                {
+                    "value": "2months",
+                    "title": "2 months",
+                    "price": "48.9"
+                },
+                {
+                    "value": "1year",
+                    "title": "1 year",
+                    "price": "139.9"
+                }
+            ]
         },
         {
             "value": "Motorcycle",
-            "title": "Motorcycle"
+            "title": "Motorcycle",
+            "data": [
+                {
+                    "value": "1day",
+                    "title": "1 day",
+                    "price": "12.9"
+                },
+                {
+                    "value": "10days",
+                    "title": "10 days",
+                    "price": "15.9"
+                },
+                {
+                    "value": "2months",
+                    "title": "2 months",
+                    "price": "29.9"
+                },
+                {
+                    "value": "1year",
+                    "title": "1 year",
+                    "price": "69.9"
+                }
+            ]
         }
     ]
 }

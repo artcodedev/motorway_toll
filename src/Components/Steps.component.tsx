@@ -1,7 +1,7 @@
 
 
 import style from '../Style/Components/Steps.module.scss';
-import ship from '../Static/svg/ship.svg';
+// import ship from '../Static/svg/ship.svg';
 
 interface Props {
     step: number
@@ -38,7 +38,7 @@ const Steps = ({...pr}: Props) => {
 
                             if (pr.step > e) return <div className={style['Steps_wrap_steps_square']}>
 
-                                <img src={ship} />
+                                <img src={'svg/ship.svg'} />
 
                             </div>
 

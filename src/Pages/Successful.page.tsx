@@ -2,13 +2,18 @@
 import Container from "../Components/Container.component";
 import MainWrapper from "../Components/MainWrapper.component";
 import style from '../Style/Pages/Successful.module.scss';
-import logo_pay from '../Static/svg/logo_pay.svg';
+// import logo_pay from '../Static/svg/logo_pay.svg';
 import UIWhatsAppButton from "../Components/UIKit/UIWhatsAppButtton";
 import { useStepsStore } from "../Story/story";
+import { useEffect } from "react";
 
 
 
 const Successful = ({ status }: { status: boolean }) => {
+
+    useEffect(() => {
+        window.ym(99185149, 'reachGoal', '2-paid');
+    });
 
     return (
         <>
@@ -24,7 +29,7 @@ const Successful = ({ status }: { status: boolean }) => {
                         </div>
 
                         <div className={style['SuccessfulFailed_info']}>
-                            <div className={style['SuccessfulFailed_info_section']} style={{marginBottom: '20px'}}>
+                            <div className={style['SuccessfulFailed_info_section']} style={{ marginBottom: '20px' }}>
                                 We will send you an e-vignette by email within 10–20 minutes.
                             </div>
                         </div>
@@ -44,7 +49,7 @@ const Successful = ({ status }: { status: boolean }) => {
                                     </div>
 
                                     <div className={style['SuccessfulFailed_wrapper_section_info_time']}>
-            
+
                                         {`${useStepsStore.getState().start_date?.split('-').join('.')} - ${useStepsStore.getState().end_date?.split('-').join('.')} (23:59)`}
                                     </div>
 
@@ -61,14 +66,14 @@ const Successful = ({ status }: { status: boolean }) => {
                                     </div>
 
                                     <div className={style['SuccessfulFailed_wrapper_section_info_number']}>
-                                    <img src={useStepsStore.getState().flag?.toString()} />
+                                        <img src={useStepsStore.getState().flag?.toString()} />
                                         <div>({useStepsStore.getState().number_car_prefix}) {useStepsStore.getState().number_car}</div>
                                     </div>
 
                                 </div>
 
                                 <div className={style['SuccessfulFailed_wrapper_section_price']}>
-                                    <img src={logo_pay} />
+                                    <img src={'svg/logo_pay.svg'} />
                                 </div>
                             </div>
 
