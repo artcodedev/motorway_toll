@@ -11,7 +11,7 @@ import Progress from './Pages/Progress.page';
 import Payment from './Pages/Payment.page';
 import Successful from './Pages/Successful.page';
 import Failed from './Pages/Failed.page';
-import Test from './Components/Test';
+// import Test from './Components/Test';
 
 // import MyComponent from './Components/Test';
 
@@ -36,7 +36,7 @@ const App = () => {
         </Route>
 
 
-        <Route path="/austria2/test" element={<Test />} />
+        {/* <Route path="/austria2/test" element={<Test />} /> */}
 
         {/* <Route path="/austria2/successful" element={<Successful status={true} />} />
 

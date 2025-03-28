@@ -109,27 +109,27 @@ const addNodetes = async () => {
 // addNodetes();
 
 
-async function createLeadWithNote() {
-  const domain = 'tollroad'; // Замените на ваш домен amoCRM
-  const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRmMThkMDFiYTc4ZDRlNmM2YzM1ZjdhOGM0ZDI5YmE4NTdjZjNjNjBhZDlkYmY0NDI0YzY4MWE1NzBlN2MxNmQzZDQ1YWI4N2IyZWVjOTBkIn0.eyJhdWQiOiJlZDhiY2E0Mi03NTA5LTQ2MDctOTk0Zi1jNjRhOTM4NjAxY2UiLCJqdGkiOiI0ZjE4ZDAxYmE3OGQ0ZTZjNmMzNWY3YThjNGQyOWJhODU3Y2YzYzYwYWQ5ZGJmNDQyNGM2ODFhNTcwZTdjMTZkM2Q0NWFiODdiMmVlYzkwZCIsImlhdCI6MTc0MjgzOTczNSwibmJmIjoxNzQyODM5NzM1LCJleHAiOjE3NDMyMDY0MDAsInN1YiI6IjE3NTMwOTgiLCJncmFudF90eXBlIjoiIiwiYWNjb3VudF9pZCI6MTY0NTc3OTYsImJhc2VfZG9tYWluIjoiYW1vY3JtLnJ1IiwidmVyc2lvbiI6Miwic2NvcGVzIjpbImNybSIsImZpbGVzIiwiZmlsZXNfZGVsZXRlIiwibm90aWZpY2F0aW9ucyIsInB1c2hfbm90aWZpY2F0aW9ucyJdLCJoYXNoX3V1aWQiOiIwZjZjMDgwZC1mZTk0LTQ0NTktYjE5Ni0wNmUxMjFmOTZlNjEiLCJhcGlfZG9tYWluIjoiYXBpLWIuYW1vY3JtLnJ1In0.Qvjqt6j_JR1kuRDXbZxaNMEEZNfYrZASd9oPatYkeprZttypnRLlet1uxXkVnkIBfsGYoOeqof30AKoLs-Bl5o6Y3Jt96DoiK-71I27MKZxH_1v4N81m_wta7fAOaTRvsp7OpjNfVlDpmEzeILmpKRi1_yUUjn2o6c0ANva8Q_V6AU9m7IiYp-1tChajfRIwsatqy7B9kwxnk4u3aoEi6grKUhGMd2bOlFT0swLlvk83oYFfhZa2Lp9HUfmNuM-fi6cucrxGw6jIqAxwJvoN_TprCAfs_wYUjUXVaWs0PiCkjsiTzfzjvm9R-n6DEShY2gYrvOpsMG10msvpCfRG8w'; // Замените на ваш токен доступа
+// async function createLeadWithNote() {
+//   const domain = 'tollroad'; // Замените на ваш домен amoCRM
+//   const accessToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRmMThkMDFiYTc4ZDRlNmM2YzM1ZjdhOGM0ZDI5YmE4NTdjZjNjNjBhZDlkYmY0NDI0YzY4MWE1NzBlN2MxNmQzZDQ1YWI4N2IyZWVjOTBkIn0.eyJhdWQiOiJlZDhiY2E0Mi03NTA5LTQ2MDctOTk0Zi1jNjRhOTM4NjAxY2UiLCJqdGkiOiI0ZjE4ZDAxYmE3OGQ0ZTZjNmMzNWY3YThjNGQyOWJhODU3Y2YzYzYwYWQ5ZGJmNDQyNGM2ODFhNTcwZTdjMTZkM2Q0NWFiODdiMmVlYzkwZCIsImlhdCI6MTc0MjgzOTczNSwibmJmIjoxNzQyODM5NzM1LCJleHAiOjE3NDMyMDY0MDAsInN1YiI6IjE3NTMwOTgiLCJncmFudF90eXBlIjoiIiwiYWNjb3VudF9pZCI6MTY0NTc3OTYsImJhc2VfZG9tYWluIjoiYW1vY3JtLnJ1IiwidmVyc2lvbiI6Miwic2NvcGVzIjpbImNybSIsImZpbGVzIiwiZmlsZXNfZGVsZXRlIiwibm90aWZpY2F0aW9ucyIsInB1c2hfbm90aWZpY2F0aW9ucyJdLCJoYXNoX3V1aWQiOiIwZjZjMDgwZC1mZTk0LTQ0NTktYjE5Ni0wNmUxMjFmOTZlNjEiLCJhcGlfZG9tYWluIjoiYXBpLWIuYW1vY3JtLnJ1In0.Qvjqt6j_JR1kuRDXbZxaNMEEZNfYrZASd9oPatYkeprZttypnRLlet1uxXkVnkIBfsGYoOeqof30AKoLs-Bl5o6Y3Jt96DoiK-71I27MKZxH_1v4N81m_wta7fAOaTRvsp7OpjNfVlDpmEzeILmpKRi1_yUUjn2o6c0ANva8Q_V6AU9m7IiYp-1tChajfRIwsatqy7B9kwxnk4u3aoEi6grKUhGMd2bOlFT0swLlvk83oYFfhZa2Lp9HUfmNuM-fi6cucrxGw6jIqAxwJvoN_TprCAfs_wYUjUXVaWs0PiCkjsiTzfzjvm9R-n6DEShY2gYrvOpsMG10msvpCfRG8w'; // Замените на ваш токен доступа
 
-  // Создание лида
-  const leadData = {
-      name: 'Название лида',
-      // Замените на ID статуса
-      // Другие поля лида
-  };
+//   // Создание лида
+//   const leadData = {
+//       name: 'Название лида',
+//       // Замените на ID статуса
+//       // Другие поля лида
+//   };
 
-  const leadResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads`, {
-      method: 'POST',
-      headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(leadData)
-  });
+//   const leadResponse = await fetch(`https://${domain}.amocrm.ru/api/v4/leads`, {
+//       method: 'POST',
+//       headers: {
+//           'Authorization': `Bearer ${accessToken}`,
+//           'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(leadData)
+//   });
 
-  console.log(leadResponse)
+//   console.log(leadResponse)
 
   // if (!leadResponse.ok) {
   //     console.error('Ошибка при создании лида:', leadResponse.statusText);
@@ -160,7 +160,7 @@ async function createLeadWithNote() {
 
   // const note = await noteResponse.json();
   // console.log('Примечание добавлено:', note);
-}
+// }
 
 
 
@@ -206,6 +206,18 @@ async function createLeadWithNote() {
 // )
 
 // console.log(response);
+
+// import {Fetch} from './src/Utils/Fetch';
+
+// (async () => {
+
+//   const fetch = await Fetch.request('http://localhost:3003/api/callback', {order_id: "93536522426031009", status: 'Paid' });
+
+//   console.log(fetch);
+
+// })();
+
+
 
 import {Fetch} from './src/Utils/Fetch';
 

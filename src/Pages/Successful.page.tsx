@@ -7,7 +7,7 @@ import UIWhatsAppButton from "../Components/UIKit/UIWhatsAppButtton";
 import { useStepsStore } from "../Story/story";
 import { useEffect } from "react";
 
-
+declare global { interface Window { ym: any } }
 
 const Successful = ({ status }: { status: boolean }) => {
 

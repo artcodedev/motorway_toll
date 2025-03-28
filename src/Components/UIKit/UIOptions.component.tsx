@@ -13,10 +13,14 @@ interface Props {
     title: string
     data: DataOptions[]
     value?: string
+    selected?: string | null
     handleChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void | undefined
 }
 
 const UIOptions = ({ ...pr }: Props) => {
+
+    // const vehicle = useStepsStore.getState().vehicle
+
     return (
         <>
 
@@ -32,7 +36,7 @@ const UIOptions = ({ ...pr }: Props) => {
                     onChange={pr.handleChange}
                 >
 
-                    {pr.data.map((e) => <option value={e.value}>{e.title}</option>)}
+                    {pr.data.map((e) => <option value={e.value} selected={pr.selected === e.value ? true : false} >{e.title}</option>)}
 
                 </select>
             </div>

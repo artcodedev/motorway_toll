@@ -76,6 +76,8 @@ const Index = () => {
     const [error, setError] = useState<boolean>(false);
     const [flag, setFlag] = useState<string>('');
 
+    // const [selectedVehicle, setSelectedVehicle] = useState<string | null>(useStepsStore.getState().vehicle)
+
     // const [typeTime, setTimeTime] = useState<string>('')
 
     const date_now = new Date();
@@ -138,25 +140,28 @@ const Index = () => {
 
     const handleChangeDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
-        if (e.currentTarget.value === '3') {
+        const value = e.currentTarget.value;
+
+        useStepsStore.getState().setTypeTime(value);
+
+        if (value === '3') {
             setSelectDate(true);
             setDateInLocalStorage(true)
             useStepsStore.getState().setStartOfValidity(startOfValidityValue[2].title);
         }
-        if (e.currentTarget.value === '1') {
+        if (value === '1') {
 
             setDateInLocalStorage(true)
 
             useStepsStore.getState().setStartOfValidity(startOfValidityValue[0].title);
         }
-        if (e.currentTarget.value === '2') {
-
+        if (value === '2') {
 
             setDateInLocalStorage(false);
             useStepsStore.getState().setStartOfValidity(startOfValidityValue[1].title)
         }
 
-        if (e.currentTarget.value !== '3') { setSelectDate(false) }
+        if (value !== '3') { setSelectDate(false) }
     }
 
 
@@ -211,29 +216,12 @@ const Index = () => {
     const setTypeAvto = (e: React.ChangeEvent<HTMLSelectElement>) => {
 
         const value = e.currentTarget.value;
-        changePrice(value)
-        // const period = useStepsStore.getState().validity;
+        console.log(value)
+
+        changePrice(value);
+        // setSelectedVehicle(value)
 
         useStepsStore.getState().setVehicle(value);
-
-        // for (let i = 0; i < Vehicle_details.data.length; i++) {
-        //     if (Vehicle_details.data[i].value === value) {
-
-        //         console.log(value)
-
-        //         console.log(Vehicle_details.data[i])
-
-        //         for (let s = 0; s < Vehicle_details.data[i].data.length; s++) {
-        //             console.log(Vehicle_details.data[i].data[s].value === period)
-        //             if (Vehicle_details.data[i].data[s].value === period) {
-        //                 useStepsStore.getState().setPrice(Vehicle_details.data[i].data[s].price);
-        //                 break
-        //             }
-        //         }
-
-        //         break
-        //     }
-        // }
 
     }
 
@@ -241,12 +229,8 @@ const Index = () => {
 
         const value = e.currentTarget.value;
 
-        console.log('212121212')
-
         for (let i = 0; i < Validity.data.length; i++) {
             if (Validity.data[i].value === value) {
-                console.log(Validity.data[i].price);
-                // useStepsStore.getState().setPrice(Validity.data[i].price);
                 useStepsStore.getState().setTypePrice(Validity.data[i].title);
                 break
             }
@@ -312,18 +296,21 @@ const Index = () => {
 
         setFlag(data.flag ? data.flag : "https://tollroad.online/austria2/svg/non_flag.png");
 
-        data.setPrice(Validity.data[0].price);
-        data.setValidity(Validity.data[0].value);
-        data.setTypePrice(Validity.data[0].title);
-        data.setVehicle(Vehicle_details.data[0].value);
+        data.setPrice(data.price ? data.price : Validity.data[0].price);
+        data.setValidity(data.validity ? data.validity : Validity.data[0].value);
+        data.setTypePrice(data.type_price ? data.type_price : Validity.data[0].title);
+        data.setVehicle(data.vehicle ? data.vehicle : Vehicle_details.data[0].value);
+        data.setTypeTime(data.type_time ? data.type_time : '1' );
+
+        if (data.type_time && data.type_time === '3') {
+            setSelectDate(true);
+        }
 
         data.setCountry(data.country ? data.country : countries[0].name);
 
-        // data.setFlag(data.flag ? data.flag : countries[0].flag);
-
         data.setNumberCarPrefix(data.number_car_prefix ? data.number_car_prefix : null);
 
-        setDateInLocalStorage(true);
+        // setDateInLocalStorage(true);
 
         if (data.start_date == null) { setDateInLocalStorage(true); }
 
@@ -344,7 +331,7 @@ const Index = () => {
                     <div style={{ margin: '32px auto' }}>
 
                         <div style={{ marginBottom: '18px' }}>
-                            <UIOptions title='Vehicle details' data={Vehicle_details.data} handleChange={setTypeAvto} />
+                            <UIOptions title='Vehicle details' data={Vehicle_details.data} selected={useStepsStore.getState().vehicle} handleChange={setTypeAvto} />
                         </div>
 
                         <div style={{ marginBottom: '18px' }}>
@@ -352,10 +339,10 @@ const Index = () => {
                         </div>
 
                         <div style={{ marginBottom: '18px' }}>
-                            <UIOptions title='Validity' data={Validity.data} handleChange={setTypeTime} />
+                            <UIOptions title='Validity' data={Validity.data} handleChange={setTypeTime} selected={useStepsStore.getState().validity}/>
                         </div>
 
-                        <UIOptions title='Start of validity' data={startOfValidityValue} handleChange={handleChangeDate} />
+                        <UIOptions title='Start of validity' data={startOfValidityValue} handleChange={handleChangeDate} selected={useStepsStore.getState().type_time}/>
 
                         {selectDate ? <div style={{ marginTop: '18px' }}>
                             <UIDateInput />

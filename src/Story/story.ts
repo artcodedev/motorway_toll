@@ -24,6 +24,7 @@ export type DataVar = {
     utm_content: string | null
     utm_nooverride: string | null
     utm_referrer: string | null
+    type_time: string | null
 }
 export type StepsData = {
 
@@ -52,6 +53,7 @@ export type StepsData = {
     setUtmContent: (data: string | null) => void
     setUtmNooverride: (data: string | null) => void
     setUtmReferrer: (data: string | null) => void
+    setTypeTime: (data: string | null) => void
 
 }
 
@@ -80,6 +82,7 @@ export const useStepsStore = createStore<DataVar & StepsData>()(
             utm_content: null,
             utm_nooverride: null,
             utm_referrer: null,
+            type_time: '1',
 
             setNumberCar: (q) => set(() => ({ number_car: q })),
             setVehicle: (q) => set(() => ({ vehicle: q })),
@@ -102,7 +105,8 @@ export const useStepsStore = createStore<DataVar & StepsData>()(
             setUtmTerm: (q) => set(() => ({ utm_term: q })),
             setUtmContent: (q) => set(() => ({ utm_content: q })),
             setUtmNooverride: (q) => set(() => ({ utm_nooverride: q })),
-            setUtmReferrer: (q) => set(() => ({ utm_referrer: q }))
+            setUtmReferrer: (q) => set(() => ({ utm_referrer: q })),
+            setTypeTime: (q) => set(() => ({ type_time: q }))
 
         }),
         { name: 'motorway' },
